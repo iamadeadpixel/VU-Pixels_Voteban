@@ -1,0 +1,11 @@
+{
+    "Name": "Voteban a player",
+    "Description": "Able to kick/ban idiots on playervote",
+    "Version": "1.0.5",
+    "Reason": "Fine tuning some stuff",
+    "Authors": [ "iamadeadpixel" ],
+  "HasVeniceEXT": true,
+  "Dependencies": {
+    "veniceext": "^1.0.0"
+  }
+}
