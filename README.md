@@ -11,6 +11,6 @@
 - !voterban
 - !votekick
 
-#### use: !votekick <playername> <reason>
+#### example use: !votekick playername reason
 - with a nice timer countdown
 - players need to vote with !yes or !no
