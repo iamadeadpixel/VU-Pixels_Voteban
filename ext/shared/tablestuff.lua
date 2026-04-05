@@ -24,11 +24,11 @@ Events:Subscribe('Level:LoadingInfo', function(screenInfo)
     minimum amount players that need to be on the server to start a vote
     If you use funbots, THIS wil count to, so keep this in mind when setting the treshhold
 ]]
-    vote_min_treshhold = 8;
+    vote_min_treshhold = 9;
 
     --[[
   This is not yet used, the min_treshhold works already as i wanted
-    vote_max_treshhold = 12; -- maximum amount players on the server as treshhold counts as outcome for the vote to be executed
+    vote_max_treshhold = 8; -- maximum amount players on the server as treshhold counts as outcome for the vote to be executed
     ]]
 
     s_MaxPlayersRCON = RCON:SendCommand('vars.maxPlayers')
