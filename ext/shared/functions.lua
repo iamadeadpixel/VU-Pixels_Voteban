@@ -96,6 +96,8 @@ function endvote(player, targetplayer)
     print("Players vote against " .. targetplayer)
     print("Kick reason given for player:" .. s_message)
     --
+    --[[
+
     print("variables collected")
     print("yesVotes:" .. yesVotes)
     print("noVotes:" .. noVotes)
@@ -103,7 +105,7 @@ function endvote(player, targetplayer)
     print("min treshhold:" .. min_treshhold)
     print("vote min treshhold:" .. vote_min_treshhold)
     print("")
-
+]]
     --
     ChatManager:SendMessage(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
     --ChatManager:SendMessage("total players inc bots:" .. players .. " Human players:" .. CountPlayers .. " Server Max:" .. server_MaxPlayers)
