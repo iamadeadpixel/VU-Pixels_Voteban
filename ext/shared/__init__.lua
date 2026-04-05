@@ -28,6 +28,11 @@ function voteban:OnEngineInit()
     self.m_voteban = require('__shared/voteban')
     self.m_votetban = require('__shared/votetban')
     self.m_voterban = require('__shared/voterban')
+
+    --[[
+Experimental
+    self.m_voteengine = require('__shared/voteengine')
+]]
 end
 
 function voteban:OnLevelDestroy()

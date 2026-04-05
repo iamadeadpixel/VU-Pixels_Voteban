@@ -71,10 +71,7 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
                 for name, fetchguid in pairs(vb_fetchplayerguid) do
                     if string.match(name:lower(), s_Parts[2]:lower()) then
                         targetplayer = name
-                        --                        targetguid = fetchguid
-                        --                        print("tablecheck: We found " .. targetplayer .. " with " .. targetguid .. " as Guid")
-                        --                        s_targetguid = ((targetguid):gsub("-", "")) -- replace - with,,,,,,,nothing !
-                        targetguid = ((fetchguid):gsub("-", "")) -- replace - with,,,,,,,nothing !
+                        targetguid = ((fetchguid):gsub("-", ""))
                         print("Found matching playername " .. targetplayer .. " with " .. targetguid .. " as Guid")
                         ChatManager:SendMessage("Matching player found " .. targetplayer .. " - GUID:" .. targetguid,
                             player)
@@ -91,14 +88,7 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
                             whitelist_player = vb_whitelist
                             print("Found:" .. whitelist_player .. ", is in the 'whitelist table'")
                             ChatManager:SendMessage("Protected players cant be banned")
-                            targetplayer = nil
-                            s_message = nil
-                            yesVotes = 0;
-                            noVotes = 0;
-                            vote_treshhold = 0
-                            vb_voteplayers = {}
-                            vb_votetype = {}
-                            vb_treshhold = true
+                            reset_vote_data(player, targetplayer)
                             return -- If the player was in the whitelist, here it ends.
                         end
                     end
@@ -112,7 +102,7 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
                     --
                     if s_Parts[3] ~= nil then
                         ss_message = (s_Parts[1] .. " " .. s_Parts[2])
-                        s_message = ((message):gsub(ss_message, "")) -- replace .ban player with,,,,,,,nothing !
+                        s_message = ((message):gsub(ss_message, ""))
 
                         print(bantype .. " Reason given for targetplayer:" .. targetplayer .. ":" .. s_message)
                         ChatManager:SendMessage(bantype .. " " .. targetplayer .. " Reason:" .. s_message)
@@ -128,13 +118,10 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
                         trigger_timer = true
                         votetban_function = true
                         print("Starting countdown for votetban on targetplayer:" .. targetplayer .. ":" .. s_message)
-                        --
                         print("Players do Yes or no on the current vote running against " .. targetplayer)
                         print(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
                         ChatManager:SendMessage("Type !yes or !no to start the " ..
                             bantype .. " against " .. targetplayer)
-
-                        --
                     end
                 end
             end

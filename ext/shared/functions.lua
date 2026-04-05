@@ -16,6 +16,7 @@ end -- end of function call
 
 -- -------------
 
+-- This stuff is triggered when the vote countdown ends
 function votekick(player, targetplayer)
     init_vote = false
     votekick_function = false
@@ -86,15 +87,7 @@ Let see what type of vote we got here
     if yesVotes == 0 and noVotes == 0 then
         print("NO VOTES: Player " .. targetplayer .. " stays")
         ChatManager:SendMessage("NO VOTES: Player " .. targetplayer .. " stays")
-        -- Reseting vote data
-        targetplayer = nil
-        s_message = nil
-        yesVotes = 0;
-        noVotes = 0;
-        vote_treshhold = 0
-        vb_voteplayers = {}
-        vb_votetype = {}
-        vb_treshhold = true
+        reset_vote_data(player, targetplayer)
         return
     end
     --
@@ -104,15 +97,7 @@ Let see what type of vote we got here
         ChatManager:SendMessage("Not enough votes, " .. targetplayer .. " stays, need " .. min_treshhold)
         print(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
         ChatManager:SendMessage(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
-        -- Reseting vote data
-        targetplayer = nil
-        s_message = nil
-        yesVotes = 0;
-        noVotes = 0;
-        vote_treshhold = 0
-        vb_voteplayers = {}
-        vb_votetype = {}
-        vb_treshhold = true
+        reset_vote_data(player, targetplayer)
         return
     end
     -- If votes are equal,player stays
@@ -121,30 +106,14 @@ Let see what type of vote we got here
         ChatManager:SendMessage("DRAW: Vote canceled, YES:" .. yesVotes .. " - NO:" .. noVotes)
         print("Player " .. targetplayer .. " stays")
         ChatManager:SendMessage("Player " .. targetplayer .. " stays")
-        -- Reseting vote data
-        targetplayer = nil
-        s_message = nil
-        yesVotes = 0;
-        noVotes = 0;
-        vote_treshhold = 0
-        vb_voteplayers = {}
-        vb_votetype = {}
-        vb_treshhold = true
+        reset_vote_data(player, targetplayer)
         return
     end
     --
     if noVotes >= vote_min_treshhold and yesVotes <= vote_min_treshhold then
         print(bantype .. ": No voters win, " .. targetplayer .. " got lucky this time")
         ChatManager:SendMessage(bantype .. ": No voters win, " .. targetplayer .. " got lucky this time")
-        -- Reseting vote data
-        targetplayer = nil
-        s_message = nil
-        yesVotes = 0;
-        noVotes = 0;
-        vote_treshhold = 0
-        vb_voteplayers = {}
-        vb_votetype = {}
-        vb_treshhold = true
+        reset_vote_data(player, targetplayer)
         return
     end
 
@@ -159,16 +128,7 @@ Let see what type of vote we got here
             ChatManager:SendMessage(bantype .. ": Yes voters win, " .. targetplayer .. " got kicked from the server")
             ChatManager:SendMessage("Kick reason given for player:" .. s_message)
             RCON:SendCommand('admin.kickPlayer', { targetplayer, (s_message) })
-
-            -- Reseting vote data
-            targetplayer = nil
-            s_message = nil
-            yesVotes = 0;
-            noVotes = 0;
-            vote_treshhold = 0
-            vb_voteplayers = {}
-            vb_votetype = {}
-            vb_treshhold = true
+            reset_vote_data(player, targetplayer)
             return
         end
     end
@@ -188,16 +148,7 @@ Let see what type of vote we got here
             RCON:SendCommand('banList.add', { "guid", tostring(targetguid), "perm", ban_message }) -- permban
             RCON:SendCommand('banlist.save')                                                       -- Save the ban to banlist.txt
             RCON:SendCommand('banlist.list')                                                       -- Reload banlist.txt (usefull whit procon)
-
-            -- Reseting vote data
-            targetplayer = nil
-            s_message = nil
-            yesVotes = 0;
-            noVotes = 0;
-            vote_treshhold = 0
-            vb_voteplayers = {}
-            vb_votetype = {}
-            vb_treshhold = true
+            reset_vote_data(player, targetplayer)
             return
         end
     end
@@ -217,16 +168,7 @@ Let see what type of vote we got here
             RCON:SendCommand('banList.add', { "guid", tostring(targetguid), "seconds", "" .. timeban .. "", ban_message })
             RCON:SendCommand('banlist.save') -- Save the ban to banlist.txt
             RCON:SendCommand('banlist.list') -- Reload banlist.txt (usefull whit procon)
-
-            -- Reseting vote data
-            targetplayer = nil
-            s_message = nil
-            yesVotes = 0;
-            noVotes = 0;
-            vote_treshhold = 0
-            vb_voteplayers = {}
-            vb_votetype = {}
-            vb_treshhold = true
+            reset_vote_data(player, targetplayer)
             return
         end
     end
@@ -245,17 +187,21 @@ Let see what type of vote we got here
             RCON:SendCommand('banList.add', { "guid", tostring(targetguid), "rounds", "" .. roundban .. "", ban_message })
             RCON:SendCommand('banlist.save') -- Save the ban to banlist.txt
             RCON:SendCommand('banlist.list') -- Reload banlist.txt (usefull whit procon)
-
-            -- Reseting vote data
-            targetplayer = nil
-            s_message = nil
-            yesVotes = 0;
-            noVotes = 0;
-            vote_treshhold = 0
-            vb_voteplayers = {}
-            vb_votetype = {}
-            vb_treshhold = true
+            reset_vote_data(player, targetplayer)
             return
         end
     end
+end -- end of function call
+
+function reset_vote_data(player, targetplayer)
+    -- Reseting vote data
+    targetplayer = nil
+    s_message = nil
+    ban_message = nil
+    yesVotes = 0;
+    noVotes = 0;
+    vote_treshhold = 0
+    vb_voteplayers = {}
+    vb_votetype = {}
+    vb_treshhold = true
 end -- end of function call

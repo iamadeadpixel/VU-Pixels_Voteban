@@ -22,33 +22,13 @@ Events:Subscribe('Player:Joining', function(name, playerGuid, ipAddress, account
 	vb_fetchplayerguid[name] = tostring(accountGuid)
 	vb_fetchplayername[name] = name
 	CountPlayers = CountPlayers + 1
-
-	print("playername:" .. vb_fetchplayername[name])
-	print("playerguid:" .. vb_fetchplayerguid[name])
 end)
 
 -- -------------
 
 Events:Subscribe('Player:Left', function(player) -- player.name
-	print("Removing player " .. vb_fetchplayername[player.name] .. " from tables")
-	print("PRE Dumping players from list")
-
-	for place, vb_fetchplayer in pairs(vb_fetchplayername) do
-		print("Found:" .. vb_fetchplayer .. " in the 'player table'")
-	end
-
 	vb_fetchplayerguid[player.name] = nil
 	vb_fetchplayername[player.name] = nil
 	vb_voteplayers[player.name] = nil
 	CountPlayers = CountPlayers - 1
-
-	print("")
-	print("POST Dumping players from list")
-	print("")
-
-	for place, vb_fetchplayer in pairs(vb_fetchplayername) do
-		print("Found:" .. vb_fetchplayer .. " in the 'player table'")
-	end
-
-	print("End of listed players on server (" .. CountPlayers .. ")")
 end)

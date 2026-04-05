@@ -32,7 +32,6 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
     end
 end)
 -- ----
-
 Events:Subscribe('Player:Chat', function(player, recipientMask, message)
     if init_vote == true and message == "!no" then
         if vb_voteplayers[player.name] then
