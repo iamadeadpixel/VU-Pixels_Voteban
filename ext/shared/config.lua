@@ -16,7 +16,7 @@ Config = {
 }
 
 --[[
-Put playernames here who cannot be banned/kick
+Put playernames here who cannot use the !banme command
 Most of time this should be server admins, and trusted players
 ]]
 

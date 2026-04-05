@@ -27,8 +27,12 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
         yesVotes = yesVotes + 1
         vote_treshhold = vote_treshhold + 1
         vb_votetype[player.name] = "yes"
-        print(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
-        ChatManager:SendMessage(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
+        print(bantype ..
+        " outcome YES:" .. yesVotes ..
+        " - NO:" .. noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2)                                                   -- We need to cheat here
+        ChatManager:SendMessage(bantype ..
+        " outcome YES:" .. yesVotes .. " - NO:" ..
+        noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2)                                                               -- We need to cheat here
     end
 end)
 -- ----
@@ -46,7 +50,11 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
         noVotes = noVotes + 1
         vote_treshhold = vote_treshhold + 1
         vb_votetype[player.name] = "no"
-        print(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
-        ChatManager:SendMessage(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
+        print(bantype ..
+            " outcome YES:" ..
+            yesVotes .. " - NO:" .. noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2) -- We need to cheat here
+        ChatManager:SendMessage(bantype ..
+            " outcome YES:" ..
+            yesVotes .. " - NO:" .. noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2) -- We need to cheat here
     end
 end)

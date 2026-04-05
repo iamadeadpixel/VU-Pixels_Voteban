@@ -113,7 +113,7 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
 		]]
                     if trigger_timer == false then
                         init_vote = true
-                        countdown_time = 180 -- time in seconds
+                        countdown_time = 180 -- time in seconds (180)
                         start__timerfunction = true
                         trigger_timer = true
                         votekick_function = true

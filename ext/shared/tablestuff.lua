@@ -16,19 +16,20 @@ Events:Subscribe('Level:LoadingInfo', function(screenInfo)
     The stuff below can be changed
 
     ]]
-    timeban = 86400   -- 24 hours timeban
-    roundban = 4      -- 2 rounds a player will be banned
-    min_treshhold = 6 -- Minimum players that need to vote that count fair enough to hold the vote
+    timeban = 86400      -- 24 hours timeban (86400)
+    roundban = 4      -- 4 rounds a player will be banned
+    min_treshhold = 9 -- Minimum players that need to vote that count fair enough to hold the vote
 
     --[[
     minimum amount players that need to be on the server to start a vote
     If you use funbots, THIS wil count to, so keep this in mind when setting the treshhold
-]]
-    vote_min_treshhold = 9;
+This value should lesser as min_treshhold
+    ]]
+    vote_min_treshhold = 8;
 
     --[[
   This is not yet used, the min_treshhold works already as i wanted
-    vote_max_treshhold = 8; -- maximum amount players on the server as treshhold counts as outcome for the vote to be executed
+    vote_max_treshhold = 12; -- maximum amount players on the server as treshhold counts as outcome for the vote to be executed
     ]]
 
     s_MaxPlayersRCON = RCON:SendCommand('vars.maxPlayers')

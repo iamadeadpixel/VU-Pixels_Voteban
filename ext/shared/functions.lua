@@ -88,27 +88,17 @@ end
 -- Here the real fun begins
 -- We counts the votes, check it its got the minimum
 -- Compares values ,and continue if all passes
--- (That is,if i manage to fix the count isue)
 function endvote(player, targetplayer)
     local players = PlayerManager:GetPlayerCount()
-    print(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes .. " Treshhold:" .. vote_treshhold)
-    print("Total players inc bots:" .. players .. " Human players:" .. CountPlayers .. " Max:" .. server_MaxPlayers)
+    print(bantype ..
+        " outcome YES:" ..
+        yesVotes .. " - NO:" .. noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2) -- We need to cheat here
+    ChatManager:SendMessage(bantype ..
+        " outcome YES:" ..
+        yesVotes .. " - NO:" .. noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2) -- We need to cheat here
     print("Players vote against " .. targetplayer)
     print("Kick reason given for player:" .. s_message)
     --
-    --[[
-
-    print("variables collected")
-    print("yesVotes:" .. yesVotes)
-    print("noVotes:" .. noVotes)
-    print("vote treshhold:" .. vote_treshhold)
-    print("min treshhold:" .. min_treshhold)
-    print("vote min treshhold:" .. vote_min_treshhold)
-    print("")
-]]
-    --
-    ChatManager:SendMessage(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
-    --ChatManager:SendMessage("total players inc bots:" .. players .. " Human players:" .. CountPlayers .. " Server Max:" .. server_MaxPlayers)
 
     --[[
 Let see what type of vote we got here with its outcome
@@ -126,15 +116,21 @@ Let see what type of vote we got here with its outcome
     if vote_treshhold <= min_treshhold then
         print("Not enough votes, " .. targetplayer .. " stays")
         ChatManager:SendMessage("Not enough votes, " .. targetplayer .. " stays")
-        print(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
-        ChatManager:SendMessage(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
+        print(bantype ..
+            " outcome YES:" .. yesVotes ..
+            " - NO:" .. noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2) -- We need to cheat here
+        ChatManager:SendMessage(bantype ..
+            " outcome YES:" .. yesVotes .. " - NO:" ..
+            noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2) -- We need to cheat here
         reset_vote_data(player, targetplayer)
         return
     end
     -- If votes are equal,player stays
     if yesVotes == noVotes then
-        print("DRAW: Vote canceled, YES:" .. yesVotes .. " - NO:" .. noVotes)
-        ChatManager:SendMessage("DRAW: Vote canceled, YES:" .. yesVotes .. " - NO:" .. noVotes)
+        print("DRAW: Vote canceled, YES:" ..
+            yesVotes .. " - NO:" .. noVotes)
+        ChatManager:SendMessage("DRAW: Vote canceled, YES:" ..
+            yesVotes .. " - NO:" .. noVotes)
         print("Player " .. targetplayer .. " stays")
         ChatManager:SendMessage("Player " .. targetplayer .. " stays")
         reset_vote_data(player, targetplayer)
