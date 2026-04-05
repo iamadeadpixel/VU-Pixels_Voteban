@@ -16,7 +16,24 @@ end -- end of function call
 
 -- -------------
 
+function reset_vote_data(player, targetplayer)
+    -- Reseting vote data
+    targetplayer = nil
+    s_message = nil
+    ban_message = nil
+    yesVotes = 0;
+    noVotes = 0;
+    vote_treshhold = 0
+    vb_voteplayers = {}
+    vb_votetype = {}
+    vb_treshhold = true
+    print("Resetting vote stuff")
+end -- end of function call
+
+-- -------------
+
 -- This stuff is triggered when the vote countdown ends
+-- it resets some base variables, and continues
 function votekick(player, targetplayer)
     init_vote = false
     votekick_function = false
@@ -68,19 +85,31 @@ function voterban(player, targetplayer)
 end
 
 -- -------------
-
+-- Here the real fun begins
+-- We counts the votes, check it its got the minimum
+-- Compares values ,and continue if all passes
+-- (That is,if i manage to fix the count isue)
 function endvote(player, targetplayer)
     local players = PlayerManager:GetPlayerCount()
-    print(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
-    print(" total players inc bots:" .. players .. " Human players:" .. CountPlayers .. " Max:" .. server_MaxPlayers)
+    print(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes .. " Treshhold:" .. vote_treshhold)
+    print("Total players inc bots:" .. players .. " Human players:" .. CountPlayers .. " Max:" .. server_MaxPlayers)
     print("Players vote against " .. targetplayer)
     print("Kick reason given for player:" .. s_message)
     --
+    print("variables collected")
+    print("yesVotes:" .. yesVotes)
+    print("noVotes:" .. noVotes)
+    print("vote treshhold:" .. vote_treshhold)
+    print("min treshhold:" .. min_treshhold)
+    print("vote min treshhold:" .. vote_min_treshhold)
+    print("")
+
+    --
     ChatManager:SendMessage(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
-    ChatManager:SendMessage("total players inc bots:" ..
-        players .. " Human players:" .. CountPlayers .. " Max:" .. server_MaxPlayers)
+    --ChatManager:SendMessage("total players inc bots:" .. players .. " Human players:" .. CountPlayers .. " Server Max:" .. server_MaxPlayers)
+
     --[[
-Let see what type of vote we got here
+Let see what type of vote we got here with its outcome
 ]]
     --
     -- if nobody votes,player stays
@@ -93,8 +122,8 @@ Let see what type of vote we got here
     --
     -- if not enough votes, no need to run the rest of the script.
     if vote_treshhold <= min_treshhold then
-        print("Not enough votes, " .. targetplayer .. " stays, need " .. min_treshhold)
-        ChatManager:SendMessage("Not enough votes, " .. targetplayer .. " stays, need " .. min_treshhold)
+        print("Not enough votes, " .. targetplayer .. " stays")
+        ChatManager:SendMessage("Not enough votes, " .. targetplayer .. " stays")
         print(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
         ChatManager:SendMessage(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
         reset_vote_data(player, targetplayer)
@@ -184,6 +213,7 @@ Let see what type of vote we got here
             print("Timeban reason given for player:" .. ban_message)
             ChatManager:SendMessage(bantype .. ": Yes voters win, " .. targetplayer .. " got Timebanned from the server")
             ChatManager:SendMessage("Timeban reason given for player:" .. ban_message)
+
             RCON:SendCommand('banList.add', { "guid", tostring(targetguid), "rounds", "" .. roundban .. "", ban_message })
             RCON:SendCommand('banlist.save') -- Save the ban to banlist.txt
             RCON:SendCommand('banlist.list') -- Reload banlist.txt (usefull whit procon)
@@ -191,17 +221,4 @@ Let see what type of vote we got here
             return
         end
     end
-end -- end of function call
-
-function reset_vote_data(player, targetplayer)
-    -- Reseting vote data
-    targetplayer = nil
-    s_message = nil
-    ban_message = nil
-    yesVotes = 0;
-    noVotes = 0;
-    vote_treshhold = 0
-    vb_voteplayers = {}
-    vb_votetype = {}
-    vb_treshhold = true
 end -- end of function call
