@@ -1,7 +1,7 @@
 # "Author": iamadeadpixel
 
 -VU mod version of procons voteban
-
+(count bug is fix mode)
 ## 05-04-2026
 ### Version 1.0.6
 #### Fine tune some stuff
