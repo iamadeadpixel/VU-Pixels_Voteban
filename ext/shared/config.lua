@@ -16,7 +16,7 @@ Config = {
 }
 
 --[[
-Put playernames here who cannot use the !banme command
+players who are protected against a voteban.
 Most of time this should be server admins, and trusted players
 ]]
 
