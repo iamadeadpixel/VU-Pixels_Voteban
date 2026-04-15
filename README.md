@@ -2,6 +2,7 @@
 
 -VU mod version of procons voteban
 - Isues, tips, le me know......
+- Not perfect and not a smooth code, but it works..
 
 ## 15-04-2026
 ### Version 1.0.8
