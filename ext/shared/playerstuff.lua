@@ -30,5 +30,6 @@ Events:Subscribe('Player:Left', function(player) -- player.name
 	vb_fetchplayerguid[player.name] = nil
 	vb_fetchplayername[player.name] = nil
 	vb_voteplayers[player.name] = nil
+	cancelvote[player.name] = nil
 	CountPlayers = CountPlayers - 1
 end)

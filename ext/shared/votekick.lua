@@ -50,6 +50,7 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
             end
 
             bantype = "votekick"
+            cancelvote[player.name] = player.name -- Only THIS player can use !cancelvote
 
             -- print the chat input to console
             print("")
@@ -121,7 +122,7 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
                         print("Players do Yes or no on the current vote running against " .. targetplayer)
                         print(bantype .. " outcome YES:" .. yesVotes .. " - NO:" .. noVotes)
                         ChatManager:SendMessage("Type !yes or !no to start the " ..
-                            bantype .. " against " .. targetplayer)
+                        bantype .. " against " .. targetplayer)
                     end
                 end
             end

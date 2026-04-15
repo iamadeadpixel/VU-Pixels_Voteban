@@ -27,6 +27,17 @@ function reset_vote_data(player, targetplayer)
     vb_voteplayers = {}
     vb_votetype = {}
     vb_treshhold = true
+
+    cancelvote = {}
+    start__timerfunction = false
+
+    trigger_timer = false
+    init_vote = false
+    votekick_function = false
+    voteban_function = false
+    votetban_function = false
+    voterban_function = false
+
     print("Resetting vote stuff")
 end -- end of function call
 

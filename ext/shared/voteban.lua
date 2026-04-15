@@ -50,6 +50,7 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
             end
 
             bantype = "voteban"
+            cancelvote[player.name] = player.name -- Only THIS player can use !cancelvote
 
             -- print the chat input to console
             print("")

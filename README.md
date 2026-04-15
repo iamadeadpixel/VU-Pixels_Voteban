@@ -1,6 +1,13 @@
 # "Author": iamadeadpixel
 
 -VU mod version of procons voteban
+- Isues, tips, le me know......
+
+## 15-04-2026
+### Version 1.0.8
+#### Added !cancelvote
+- Command added !cancelvote
+- Only voter can use the !cancelvote, incase it was the wrong name.
 
 ## 05-04-2026
 ### Version 1.0.7
@@ -10,6 +17,11 @@
 - !votetban
 - !voterban
 - !votekick
+
+#### use: !votekick <playername> <reason>
+- with a nice timer countdown
+- players need to vote with !yes or !no
+
 
 #### example use: !votekick playername reason
 - with a nice timer countdown

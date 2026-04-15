@@ -28,11 +28,11 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
         vote_treshhold = vote_treshhold + 1
         vb_votetype[player.name] = "yes"
         print(bantype ..
-        " outcome YES:" .. yesVotes ..
-        " - NO:" .. noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2)                                                   -- We need to cheat here
+            " outcome YES:" .. yesVotes ..
+            " - NO:" .. noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2) -- We need to cheat here
         ChatManager:SendMessage(bantype ..
-        " outcome YES:" .. yesVotes .. " - NO:" ..
-        noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2)                                                               -- We need to cheat here
+            " outcome YES:" .. yesVotes .. " - NO:" ..
+            noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2) -- We need to cheat here
     end
 end)
 -- ----
@@ -56,5 +56,28 @@ Events:Subscribe('Player:Chat', function(player, recipientMask, message)
         ChatManager:SendMessage(bantype ..
             " outcome YES:" ..
             yesVotes .. " - NO:" .. noVotes .. " Vote treshhold:" .. vote_treshhold .. "/" .. vote_min_treshhold + 2) -- We need to cheat here
+    end
+end)
+
+-- ----
+
+Events:Subscribe('Player:Chat', function(player, recipientMask, message)
+    if init_vote == false and message == "!cancelvote" then
+        print("`No vote in progress, !cancelvote not working")
+        ChatManager:SendMessage("`No vote in progress, !cancelvote not working")
+    end
+    --
+    if init_vote == true and message == "!cancelvote" then
+        print("Lets check the playername")
+
+        if cancelvote[player.name] == player.name then
+            print("valid cancelvote name found - " .. cancelvote[player.name])
+            print(bantype .. " canceled on " .. targetplayer)
+            print("vote timer left:" .. countdown_time)
+            ChatManager:SendMessage(bantype .. " canceled on " .. targetplayer .. " Wrong name ?")
+
+
+            reset_vote_data(player, targetplayer)
+        end
     end
 end)
